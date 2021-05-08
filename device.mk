@@ -12,7 +12,7 @@ $(call inherit-product, vendor/oneplus/hotdogb/hotdogb-vendor.mk)
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay-descendant
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -37,3 +37,12 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_SHIPPING_API_LEVEL := 29
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml
+PRODUCT_PROPERTY_OVERRIDES += \
+	debug.hwui.renderer=skiavk \
+	ro.surface_flinger.max_frame_buffer_acquired_buffers=3
+TARGET_HAS_HDR_DISPLAY := true
+# Descendant specific properties
+TARGET_FACE_UNLOCK_SUPPORTED := true
+PRODUCT_BOARD_PLATFORM := msmnile
+PRODUCT_USES_QCOM_HARDWARE := true
